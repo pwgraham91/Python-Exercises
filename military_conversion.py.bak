@@ -13,4 +13,4 @@ def zero_converter(num):
     else:
         return str(num)
 
-print('{}:{}:{}'.format(zero_converter(a.tm_hour), zero_converter(a.tm_min), zero_converter(a.tm_sec)))
+print '{}:{}:{}'.format(zero_converter(a.tm_hour), zero_converter(a.tm_min), zero_converter(a.tm_sec))

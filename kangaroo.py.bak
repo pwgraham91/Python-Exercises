@@ -27,13 +27,13 @@ for i in range(10000):
     sorted_ks = sorted(ks, key=itemgetter(0))
 
     if sorted_ks[0][0] == sorted_ks[1][0]:
-        print('YES')
+        print 'YES'
         break
     elif sorted_ks[0][1] > sorted_ks[1][1]:
         k1[0] = k1[0] + k1[1]
         k2[0] = k2[0] + k2[1]
     else:
-        print('NO')
+        print 'NO'
         break
 else:
-    print('NO')
+    print 'NO'

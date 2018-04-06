@@ -12,6 +12,6 @@ for i in chart:
     seated.append(chosen_one)
     students.remove(chosen_one)
     chart[i] =chosen_one
-print(students)
-print(seated)
-print(chart)
+print students
+print seated
+print chart

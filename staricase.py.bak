@@ -38,16 +38,16 @@ The staircase is right-aligned, composed of # symbols and spaces, and has a heig
 import sys
 
 n = 6
-for a in range(n):
-    for b in range(n):
+for a in xrange(n):
+    for b in xrange(n):
         sys.stdout.write(str(b))
-    print()
+    print
 
-for a in range(n):
-    for b in range(n):
+for a in xrange(n):
+    for b in xrange(n):
         if n - b <= a + 1:
-            print('#', end=' ')
+            print '#',
         else:
-            print(' ', end=' ')
-    print()
+            print ' ',
+    print
 

@@ -36,4 +36,4 @@ n = 1
 ids = [5, 2, 1]
 
 sorted_ids = sorted(ids)
-print(sorted_ids[n])
+print sorted_ids[n]

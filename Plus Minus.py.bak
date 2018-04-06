@@ -46,6 +46,6 @@ for i in arr:
     else:
         zeroes += 1
 
-print(float(positive) / n)
-print(float(negative) / n)
-print(float(zeroes) / n)
+print float(positive) / n
+print float(negative) / n
+print float(zeroes) / n

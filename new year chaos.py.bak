@@ -13,7 +13,7 @@ class Breaker(Exception):
     pass
 
 unparsed = '2 1 5 3 4'
-q = list(map(int, unparsed.split()))
+q = map(int, unparsed.split())
 
 
 def spots_away_from_initial(arr):
@@ -30,7 +30,7 @@ def flip_spots(n):
     position = spots_arr[n][2]
 
     if spots_away == 1:
-        print(i)
+        print i
         raise Breaker('all done')
     up_or_down = 1 if spots_away > 0 else -1
     totem_pole = q[position] > q[position + up_or_down]
@@ -55,13 +55,13 @@ bribe_book = {}
 try:
     while True:
         spots_arr = spots_away_from_initial(q)
-        for value in list(bribe_book.values()):
+        for value in bribe_book.values():
             if value > 2:
-                print('Too chaotic')
+                print 'Too chaotic'
                 raise Breaker('all done')
         flip_spots(0)
     else:
-        print('finished')
+        print 'finished'
 except Breaker as e:
     if e.message != 'all done':
         raise e

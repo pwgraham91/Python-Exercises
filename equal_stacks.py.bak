@@ -55,7 +55,7 @@ for i in range(max([len(stack.stack) for stack in stacks])):
     # check equality
     stack_sums = [_stack.sum for _stack in stacks]
     if min(stack_sums) == 0 or len(set(stack_sums)) == 1:
-        print(stacks[0].sum)
+        print stacks[0].sum
         break
 
     stacks = sorted(stacks, key=attrgetter('sum'), reverse=True)

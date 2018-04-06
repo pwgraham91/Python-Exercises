@@ -32,6 +32,6 @@ def striped_words(text):
             good_words.remove(word)
     return len(good_words)
 
-print(striped_words("A quantity of striped words"))
-print(striped_words('Are there any striped words in this sentence?'))
-print(striped_words('Are any in'))
+print striped_words("A quantity of striped words")
+print striped_words('Are there any striped words in this sentence?')
+print striped_words('Are any in')

@@ -47,7 +47,6 @@ rows = [[11, 2, 4],
         [4, 5, 6],
         [10, 8, -12]]
 
-
 def row_summation(rows):
     on_row = 0
     _sum = 0
@@ -56,6 +55,5 @@ def row_summation(rows):
         on_row += 1
     return _sum
 
-
 difference = abs(row_summation(rows) - row_summation(rows[::-1]))
-print(difference)
+print difference

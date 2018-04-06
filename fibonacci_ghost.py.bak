@@ -19,4 +19,4 @@ def fibonacci_ghost(opacity):
             ghost_opacity.append(ghost_opacity[-1] + 1)
     return ghost_opacity.index(opacity)
 
-print(fibonacci_ghost(9995))
+print fibonacci_ghost(9995)

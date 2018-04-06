@@ -28,9 +28,9 @@ def tictactoe_referee(game_result):
         row += 1
     return "D"
 
-print(tictactoe_referee(
+print tictactoe_referee(
     [
-        "...",
-        "XXX",
-        "XXO"]
-))
+        u"...",
+        u"XXX",
+        u"XXO"]
+)

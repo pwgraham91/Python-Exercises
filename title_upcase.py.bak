@@ -13,7 +13,7 @@ def turn_upper(title):
         else:
             title4.append(letter)
     title4 = " ".join(title4)
-    print(title4)
+    print title4
 
 turn_upper('my title')
 

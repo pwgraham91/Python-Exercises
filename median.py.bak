@@ -11,4 +11,4 @@ def median(data):
         return data[len(data) / 2]
 
 
-print(median([3, 6, 20, 99, 10, 15]))
+print median([3, 6, 20, 99, 10, 15])

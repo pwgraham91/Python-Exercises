@@ -11,7 +11,7 @@ def choosing():
     dirty_shirts.append(chosen_shirt)
     clean_shirts.remove(chosen_shirt)
     day += 1
-    print("dirty", dirty_shirts)
-    print("clean", clean_shirts)
+    print "dirty", dirty_shirts
+    print "clean", clean_shirts
 while len(clean_shirts) > 0:
     choosing()

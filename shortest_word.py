@@ -5,13 +5,17 @@ String will never be empty and you do not need to account for different data typ
 """
 
 
-def find_short(string):
+def find_short_first_attempt(string):
     shortest_word_length = None
     for word in string.split(' '):
         len_word = len(word)
         if shortest_word_length is None or len_word < shortest_word_length:
             shortest_word_length = len_word
     return shortest_word_length
+
+
+def find_short(string):
+    return min(len(word) for word in string.split(' '))
 
 
 assert find_short("bitcoin take over the world maybe who knows perhaps") == 3

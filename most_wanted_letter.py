@@ -1,52 +1,22 @@
 __author__ = 'petergraham'
 
 
-def most_wanted_letter(text):
-    string = text.lower()
-    dictionary = [
-        ['a', 0],
-        ['b', 0],
-        ['c', 0],
-        ['d', 0],
-        ['e', 0],
-        ['f', 0],
-        ['g', 0],
-        ['h', 0],
-        ['i', 0],
-        ['j', 0],
-        ['k', 0],
-        ['l', 0],
-        ['m', 0],
-        ['n', 0],
-        ['o', 0],
-        ['p', 0],
-        ['q', 0],
-        ['r', 0],
-        ['s', 0],
-        ['t', 0],
-        ['u', 0],
-        ['v', 0],
-        ['w', 0],
-        ['x', 0],
-        ['y', 0],
-        ['z', 0],
-    ]
-    for i in string:
-        if i.isalpha():
-            counter = 0
-            for a in dictionary:
-                if i == dictionary[counter][0]:
-                    dictionary[counter][1] += 1
-                counter += 1
-    max_letters = 0
-    for i in dictionary:
-        if max_letters < i[1]:
-            max_letters = i[1]
-    max_list = []
-    for i in dictionary:
-        if max_letters == i[1]:
-            max_list.append(i[0])
-    return max_list[0]
+def get_most_common_letter(text):
+    letter_count = {}
+    current_high_letter = {
+        'letter': None,
+        'count': 0
+    }
+    for letter in text:
+        lower_letter = letter.lower()
+
+        letter_count[lower_letter] = 1 + letter_count.get(lower_letter) if letter_count.get(lower_letter) else 1
+
+        if letter_count[lower_letter] > current_high_letter['count']:
+            current_high_letter['letter'] = lower_letter
+            current_high_letter['count'] = letter_count[lower_letter]
+
+    return current_high_letter['letter']
 
 
-print(most_wanted_letter("Hello World"))
+print(get_most_common_letter("Hello World"))

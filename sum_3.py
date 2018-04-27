@@ -13,7 +13,10 @@ If any set of 3 elements is equal to the constant c, then return false
 
 
 def find_3(array, constant):
-    """ O(n^3) """
+    """
+     O(n^3)
+     longform: O((n-1)^3)
+    """
 
     array_len = len(array)
     for count, a in enumerate(array):
@@ -31,7 +34,16 @@ def find_3(array, constant):
 
 
 def find_3_dict(array, constant):
-    """ O(n^2) """
+    """
+     average: O(n^2)
+     longform: O(n + (n-1)^2)
+
+     worst: O(n^3)
+     longform: O(n + (n-1)^3)
+
+     This trades space optimization for time. By adding all of the indices to a dictionary, we only have to do 1
+     nested for loop and search the dictionary for the needed number based on the sum of the first 2 numbers.
+    """
 
     mapped_ints = {}
     for i in array:

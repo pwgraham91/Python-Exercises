@@ -169,6 +169,18 @@ assert validate_sudoku_matrix(solve([
 ]))
 
 assert validate_sudoku_matrix(solve([
+    [None, 2, None, None, None, None, None, None, None],
+    [None, None, None, 6, None, None, None, None, 3],
+    [None, 7, 4, None, 8, None, None, None, None],
+    [None, None, None, None, None, 3, None, None, 2],
+    [None, 8, None, None, 4, None, None, 1, None],
+    [6, None, None, 5, None, None, None, None, None],
+    [None, None, None, None, 1, None, 7, 8, None],
+    [5, None, None, None, None, 9, None, None, None],
+    [None, None, None, None, None, None, None, 4, None]
+]))
+
+assert validate_sudoku_matrix(solve([
     [None, 8, None, None, None, 6, None, 2, 5],
     [None, 1, 5, None, 7, None, None, None, None],
     [None, None, None, None, None, None, 6, None, None],

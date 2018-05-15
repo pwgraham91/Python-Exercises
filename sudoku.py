@@ -81,11 +81,15 @@ def solve(hint_matrix):
 
     # after exhausting the possibility setter, if there's still unknowns, check the unknown spots
     check_unknown_spots(hint_matrix, unknown_spots, all_possible_numbers)
+    return hint_matrix
 
 
 def check_unknown_spots(hint_matrix, unknown_spots, all_possible_numbers):
     for unknown_spot in unknown_spots:
         possible_numbers = hint_matrix[unknown_spot[0]][unknown_spot[1]]
+
+        if type(possible_numbers) == int:
+            continue
 
         for possible_number in possible_numbers:
             found_duplicate_number = False
@@ -118,10 +122,26 @@ def check_unknown_spots(hint_matrix, unknown_spots, all_possible_numbers):
                 return
 
 
-def validate_sudoku_matrix(matrix):
-    pass
+def validate_group(group):
+    for obj in group:
+        if type(obj) != int:
+            return False
+    if len(set(group)) != 9:
+        return False
+    return True
 
-assert validate_sudoku_matrix(solve([
+
+def validate_sudoku_matrix(matrix):
+    for row in matrix:
+        if not validate_group(row):
+            return False
+
+    for i in range(9):
+        # validate columns
+        validate_group([row[i] for row in matrix])
+
+
+validate_sudoku_matrix(solve([
     [None, None, None, 2, 6, None, 7, None, 1],
     [6, 8, None, None, 7, None, None, 9, None],
     [1, 9, None, None, None, 4, 5, None, None],
@@ -134,7 +154,7 @@ assert validate_sudoku_matrix(solve([
 ]))
 
 
-assert solve([
+validate_sudoku_matrix(solve([
     [4, None, 5, None, 2, None, None, 6, None],
     [6, None, None, 9, None, None, None, 1, 3],
     [None, 9, None, 3, 6, 7, None, None, 5],
@@ -144,4 +164,4 @@ assert solve([
     [8, None, None, 2, 4, 5, None, 9, None],
     [9, 7, None, None, None, 3, None, None, 2],
     [None, 5, None, None, 7, None, 8, None, 6]
-]) == []
+]))

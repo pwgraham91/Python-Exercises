@@ -3,14 +3,6 @@ solve sudoku
 """
 
 
-def check_row(i, row, possible_numbers):
-    if type(row[i]) == int:
-        try:
-            possible_numbers.remove(row[i])
-        except ValueError:
-            pass
-
-
 def check_cell(row_index, column_index, hint_matrix, possible_numbers):
     if type(hint_matrix[row_index][column_index]) == int:
         try:
@@ -72,6 +64,7 @@ def solve(hint_matrix):
     for unknown_spot in unknown_spots:
         unknown = hint_matrix[unknown_spot[0]][unknown_spot[1]]
         a = 1
+
 
 assert solve([
     [4, None, 5, None, 2, None, None, 6, None],

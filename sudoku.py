@@ -33,6 +33,7 @@ def check_square(hint_matrix, r_i, c_i, possible_numbers):
 
 
 def set_possibilities(r_i, c_i, hint_matrix, all_possible_numbers, unknown_spots=None):
+    altered = False
     obj = hint_matrix[r_i][c_i]
     if type(obj) != int:
         possible_numbers = list(all_possible_numbers)
@@ -45,25 +46,92 @@ def set_possibilities(r_i, c_i, hint_matrix, all_possible_numbers, unknown_spots
 
         if len(possible_numbers) == 1:
             hint_matrix[r_i][c_i] = possible_numbers[0]
+            if [r_i, c_i] in unknown_spots:
+                unknown_spots.remove([r_i, c_i])
+            altered = True
         else:
             # set the None as its list of possible numbers
             hint_matrix[r_i][c_i] = possible_numbers
             # add unknown spots
             if unknown_spots is not None:
                 unknown_spots.append([r_i, c_i])
+    return altered
+
+
+def opposing_cell_has_duplicate(opposing_cell, possible_number):
+    if type(opposing_cell) == list:
+        if possible_number in opposing_cell:
+            return True
+    return False
 
 
 def solve(hint_matrix):
     all_possible_numbers = range(1, 10)
     unknown_spots = []
 
-    for r_i, row in enumerate(hint_matrix):
-        for c_i, obj in enumerate(row):
-            set_possibilities(r_i, c_i, hint_matrix, all_possible_numbers, unknown_spots)
+    changed = True
+    while changed:
+        changed = False
+        # keep running through the possibility setter until we've exhausted that method
+        for r_i, row in enumerate(hint_matrix):
+            for c_i, obj in enumerate(row):
+                altered = set_possibilities(r_i, c_i, hint_matrix, all_possible_numbers, unknown_spots)
+                if altered:
+                    changed = True
 
+    # after exhausting the possibility setter, if there's still unknowns, check the unknown spots
+    check_unknown_spots(hint_matrix, unknown_spots, all_possible_numbers)
+
+
+def check_unknown_spots(hint_matrix, unknown_spots, all_possible_numbers):
     for unknown_spot in unknown_spots:
-        unknown = hint_matrix[unknown_spot[0]][unknown_spot[1]]
-        a = 1
+        possible_numbers = hint_matrix[unknown_spot[0]][unknown_spot[1]]
+
+        for possible_number in possible_numbers:
+            found_duplicate_number = False
+
+            for i in range(9):
+                # check row
+                opposing_cell_row = unknown_spot[0]
+                opposing_cell_column = i
+                if not (opposing_cell_row == unknown_spot[0] and opposing_cell_column == unknown_spot[1]):
+                    if opposing_cell_has_duplicate(hint_matrix[unknown_spot[0]][i], possible_number):
+                        found_duplicate_number = True
+                        break
+
+                # check column
+                opposing_cell_row = i
+                opposing_cell_column = unknown_spot[1]
+                if not (opposing_cell_row == unknown_spot[0] and opposing_cell_column == unknown_spot[1]):
+                    if opposing_cell_has_duplicate(hint_matrix[unknown_spot[0]][i], possible_number):
+                        found_duplicate_number = True
+                        break
+
+            if not found_duplicate_number:
+                hint_matrix[unknown_spot[0]][unknown_spot[1]] = possible_number
+                unknown_spots.remove(unknown_spot)
+
+                for _spot in unknown_spots:
+                    set_possibilities(_spot[0], _spot[1], hint_matrix, all_possible_numbers, unknown_spots)
+
+                check_unknown_spots(hint_matrix, unknown_spots, all_possible_numbers)
+                return
+
+
+def validate_sudoku_matrix(matrix):
+    pass
+
+assert validate_sudoku_matrix(solve([
+    [None, None, None, 2, 6, None, 7, None, 1],
+    [6, 8, None, None, 7, None, None, 9, None],
+    [1, 9, None, None, None, 4, 5, None, None],
+    [8, 2, None, 1, None, None, None, 4, None],
+    [None, None, 4, 6, None, 2, 9, None, None],
+    [None, 5, None, None, None, 3, None, 2, 8],
+    [None, None, 9, 3, None, None, None, 7, 4],
+    [None, 4, None, None, 5, None, None, 3, 6],
+    [7, None, 3, None, 1, 8, None, None, None]
+]))
 
 
 assert solve([

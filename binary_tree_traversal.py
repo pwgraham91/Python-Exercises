@@ -1,23 +1,30 @@
-"""
-Given a binary tree, return the preorder traversal of its nodes' values.
-
-Input: [1,null,2,3]
-   1
-    \
-     2
-    /
-   3
-
-Output: [1,2,3]
-"""
-
+import binarytree
 
 # Definition for a binary tree node.
 class TreeNode:
-    def __init__(self, x):
-        self.val = x
+    def __init__(self, value):
+        self.val = value
         self.left = None
         self.right = None
+
+    def insert_left(self, value):
+        if self.left is None:
+            self.left = TreeNode(value)
+        else:
+            new_node = TreeNode(value)
+            new_node.left = self.left
+            self.left = new_node
+
+    def insert_right(self, value):
+        if self.right is None:
+            self.right = TreeNode(value)
+        else:
+            new_node = TreeNode(value)
+            new_node.right = self.right
+            self.right = new_node
+
+    def __repr__(self):
+        return '|val: {}, left: {}, right: {}|'.format(self.val, self.left, self.right)
 
 
 class Solution:
@@ -49,3 +56,43 @@ class Solution:
         left = self.postorderTraversal(root.left)
         right = self.postorderTraversal(root.right)
         return left + right + [root.val]
+
+
+def binary_1():
+    a_node = TreeNode('a')
+    a_node.insert_left('b')
+    a_node.insert_right('c')
+
+    b_node = a_node.left
+    b_node.insert_right('d')
+
+    c_node = a_node.right
+    c_node.insert_left('e')
+    c_node.insert_right('f')
+
+    d_node = b_node.right
+    e_node = c_node.left
+    f_node = c_node.right
+
+
+binary_1()
+
+
+def binary_2():
+    a_node = binarytree.Node('a')
+    a_node.insert_left('b')
+    a_node.insert_right('c')
+
+    b_node = a_node.left
+    b_node.insert_right('d')
+
+    c_node = a_node.right
+    c_node.insert_left('e')
+    c_node.insert_right('f')
+
+    d_node = b_node.right
+    e_node = c_node.left
+    f_node = c_node.right
+    print(a_node)
+
+binary_2()

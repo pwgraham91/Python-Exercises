@@ -1,4 +1,4 @@
-import binarytree
+from binarytree import Node, tree
 
 # Definition for a binary tree node.
 class TreeNode:
@@ -79,7 +79,7 @@ binary_1()
 
 
 def binary_2():
-    a_node = binarytree.Node('a')
+    a_node = Node('a')
     a_node.insert_left('b')
     a_node.insert_right('c')
 
@@ -89,10 +89,100 @@ def binary_2():
     c_node = a_node.right
     c_node.insert_left('e')
     c_node.insert_right('f')
+    a_node.insert_left('new')
 
     d_node = b_node.right
     e_node = c_node.left
     f_node = c_node.right
     print(a_node)
 
-binary_2()
+# binary_2()
+
+
+def build_3_layer_even_tree():
+    a_node = Node('a')
+    a_node.insert_left('b')
+    a_node.insert_right('c')
+
+    b_node = a_node.left
+    b_node.insert_left('d')
+    b_node.insert_right('e')
+
+    c_node = a_node.right
+    c_node.insert_left('f')
+    c_node.insert_right('g')
+
+    return a_node
+
+
+def _dfs_recursive(search_for, node):
+    if node is None:
+        return
+
+    if node.value == search_for:
+        return True
+
+    search_left = _dfs_recursive(search_for, node.left)
+    if search_left:
+        return True
+    search_right = _dfs_recursive(search_for, node.right)
+    if search_right:
+        return True
+
+
+def depth_first_search_recursive(search_for):
+    a_node = build_3_layer_even_tree()
+    print(a_node)
+
+    if _dfs_recursive(search_for, a_node):
+        return True
+    return False
+
+
+def breadth_first_search_iterative(search_for):
+    iterator = []
+    a_node = build_3_layer_even_tree()
+    print(a_node)
+
+    if _bfs_iterative(search_for, a_node, iterator):
+        return True
+    return False
+
+
+def add_to_queue(node, iterator):
+    if node.left is not None:
+        iterator.append(node.left)
+    if node.right is not None:
+        iterator.append(node.right)
+
+
+def _bfs_iterative(search_for, node, iterator):
+    if node is None:
+        return
+
+    # add root
+    iterator.append(node)
+
+    add_to_queue(node, iterator)
+
+    while len(search_for) > 0:
+        obj = iterator.pop(0)
+        print(obj.value)
+        if obj.value == search_for:
+            return True
+        else:
+            add_to_queue(obj, iterator)
+
+
+breadth_first_search_iterative('c')
+
+
+def breadth_first_search(search_for):
+    a_node = build_3_layer_even_tree()
+    print(a_node)
+
+    if _bfs_recursive(search_for, a_node):
+        return True
+    return False
+
+# breadth_first_search('g')

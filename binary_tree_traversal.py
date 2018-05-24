@@ -115,6 +115,34 @@ def build_3_layer_even_tree():
     return a_node
 
 
+def build_4_layer_even_tree():
+    a_node = Node('a')
+    a_node.insert_left('b')
+    a_node.insert_right('c')
+
+    b_node = a_node.left
+    d_node = b_node.insert_left('d')
+    e_node = b_node.insert_right('e')
+
+    c_node = a_node.right
+    f_node = c_node.insert_left('f')
+    g_node = c_node.insert_right('g')
+
+    h_node = d_node.insert_left('h')
+    i_node = d_node.insert_right('i')
+
+    j_node = e_node.insert_left('j')
+    k_node = e_node.insert_right('k')
+
+    l_node = f_node.insert_left('l')
+    m_node = f_node.insert_right('m')
+
+    n_node = g_node.insert_left('n')
+    o_node = g_node.insert_right('o')
+
+    return a_node
+
+
 def _dfs_recursive(search_for, node):
     if node is None:
         return
@@ -174,15 +202,21 @@ def _bfs_iterative(search_for, node, iterator):
             add_to_queue(obj, iterator)
 
 
-breadth_first_search_iterative('c')
+def depth_first_iterative(search_for):
+    root = build_4_layer_even_tree()
+    print(root)
 
-
-def breadth_first_search(search_for):
-    a_node = build_3_layer_even_tree()
-    print(a_node)
-
-    if _bfs_recursive(search_for, a_node):
-        return True
+    stack = [root]
+    while stack:
+        node = stack.pop(0)
+        print(node.value)
+        if node.value == search_for:
+            return True
+        if node.right is not None:
+            stack.insert(0, node.right)
+        if node.left is not None:
+            stack.insert(0, node.left)
     return False
 
-# breadth_first_search('g')
+
+depth_first_iterative('p')

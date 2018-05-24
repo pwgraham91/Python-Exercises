@@ -325,6 +325,7 @@ class Node(object):
             new_node = Node(value)
             new_node.left = self.left
             self.left = new_node
+        return self.left
 
     def insert_right(self, value):
         if self.right is None:
@@ -333,6 +334,7 @@ class Node(object):
             new_node = Node(value)
             new_node.right = self.right
             self.right = new_node
+        return self.right
 
     def __repr__(self):
         """Return the string representation of the current node.

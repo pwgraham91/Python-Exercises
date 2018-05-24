@@ -41,7 +41,13 @@ def iterate_and_remove(forwards, removable_characters):
 def brute_solve(forwards, removable_characters):
     """
     n^k runtime where k <= n
+    n = length of string
+    k = removable characters
+    k cannot be greater than n
     """
+    if removable_characters > len(forwards):
+        return False
+
     if forwards == reverse_string(forwards):
         return True
 

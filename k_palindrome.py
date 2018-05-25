@@ -53,8 +53,8 @@ def brute_solve(forwards, removable_characters):
 
     if iterate_and_remove(forwards, removable_characters - 1):
         return True
-    else:
-        return False
+
+    return False
 
 
 assert brute_solve('abxa', 1)

@@ -34,15 +34,30 @@ def get_limits(number):
     return lower_limit, upper_limit
 
 
-def add_lower(number, constructed_numeral):
-    lower_limit, upper_limit = get_limits(number)
-    constructed_numeral.append(lower_limit[1])
+def get_subtractable_number(number, upper_limit):
+    for latin_num, roman_num in base_romans:
+        if upper_limit[0] - latin_num == number:
+            return '{}{}'.format(roman_num, upper_limit[1])
 
-    number -= lower_limit[0]
+
+def append_numeral(number, constructed_numeral):
+    lower_limit, upper_limit = get_limits(number)
+
+    if lower_limit[0] == number:
+        constructed_numeral.append(lower_limit[1])
+        number -= lower_limit[0]
+
+    elif get_subtractable_number(number, upper_limit):
+        constructed_numeral.append(get_subtractable_number(number, upper_limit))
+        number -= number
+
+    else:
+        constructed_numeral.append(lower_limit[1])
+        number -= lower_limit[0]
     if number == 0:
         return constructed_numeral
     else:
-        return add_lower(number, constructed_numeral)
+        return append_numeral(number, constructed_numeral)
 
 
 def to_roman(number):
@@ -51,9 +66,11 @@ def to_roman(number):
 
     constructed_numeral = []
 
-    a = ''.join(add_lower(number, constructed_numeral))
-    return a
+    result = ''.join(append_numeral(number, constructed_numeral))
+    return result
 
+
+to_roman(9)
 
 chart = [
     [1, 'I'],
@@ -159,7 +176,12 @@ chart = [
     [101, 'CI']
 ]
 
-for i in chart:
-    result = to_roman(i[0]) == i[1]
-    if not result:
-        print('{} != {}'.format(to_roman(i[0]), i[1]))
+
+def test_chart():
+    for i in chart:
+
+        result = to_roman(i[0])
+        if result != i[1]:
+            print('{} : {} != {}'.format(i[0], result, i[1]))
+
+test_chart()

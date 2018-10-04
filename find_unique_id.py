@@ -17,6 +17,8 @@ def generate_log():
 
 def find_unique_id_cycling(log):
     """
+    Iterates through the whole list once for each of the items in the list. Adds 1 to a counter per iteration through
+    the list and if the counter = 1, that is the unique instance.
     time complexity: n^2
     space complexity: 1
     """
@@ -37,6 +39,8 @@ def find_unique_id_cycling(log):
 def find_unique_cycling_reduction(log):
     """
     time complexity: (((n-1) / 2) ^ 2) + (n-1) / 2
+    why? n - 1 / 2 is the number of ids, ^2 because you need to trace through the list recursively but /2 because
+    you're reducing the list as you go
     space complexity: 1
     """
     copied_log = log.copy()
@@ -74,18 +78,18 @@ def find_unique_dict(log):
 def find_unique_sort(log):
     """
     time complexity: nlogn + (n-1)
-    space complexity: n
+    space complexity: 1
     """
-    sorted_log = sorted(log)
+    log.sort()
     for a in range(len(log)):
         try:
-            if sorted_log[0] == sorted_log[1]:
-                sorted_log.pop(1)
-                sorted_log.pop(0)
+            if log[0] == log[1]:
+                log.pop(1)
+                log.pop(0)
             else:
-                return sorted_log[a]
+                return log[a]
         except IndexError:
-            return sorted_log[0]
+            return log[0]
 
 
 def find_unique_crazy_xor(delivery_ids):

@@ -3,7 +3,7 @@ Write a function kth_to_last_node() that takes an integer kk and the head_node o
 kth to last node in the list.
 
 time complexity: n
-space complexity: k
+space complexity: k where k < n
 """
 import unittest
 

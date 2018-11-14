@@ -22,6 +22,7 @@ space: n
 
 """
 import unittest
+from time import perf_counter
 
 
 def validate_brackets(string):
@@ -62,5 +63,23 @@ class Test(unittest.TestCase):
     def test_case_3(self):
         self.assertFalse(validate_brackets("{ [ }"))
 
+
+with open('100k.txt') as file:
+    data = file.read()
+    t0 = perf_counter()
+    validate_brackets(data)
+    print('100k time: {}'.format(perf_counter() - t0))
+
+with open('1million.txt') as file:
+    data = file.read()
+    t0 = perf_counter()
+    validate_brackets(data)
+    print('1million time: {}'.format(perf_counter() - t0))
+
+with open('10million.txt') as file:
+    data = file.read()
+    t0 = perf_counter()
+    validate_brackets(data)
+    print('10million time: {}'.format(perf_counter() - t0))
 
 unittest.main(verbosity=2)

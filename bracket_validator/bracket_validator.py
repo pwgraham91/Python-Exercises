@@ -47,6 +47,9 @@ def validate_brackets(string):
             last_opener = open_openers.pop()
             if last_opener != corresponding_opener:
                 return False
+
+    if len(open_openers) > 0:
+        return False
     return True
 
 
@@ -62,6 +65,9 @@ class Test(unittest.TestCase):
 
     def test_case_3(self):
         self.assertFalse(validate_brackets("{ [ }"))
+
+    def test_charlie(self):
+        self.assertFalse(validate_brackets("{ {"))
 
 
 with open('100k.txt') as file:

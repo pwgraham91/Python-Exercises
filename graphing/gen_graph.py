@@ -28,7 +28,7 @@ def fully_connected(n):
 # {1:set([2,3]), 2:set(1,3), 3:set(1,2)} -> [[1,[2,3]],[2,[1,3]],[3,[1,2]]]
 def flatten_digraph(digraph):
     g = []
-    for node, neighbors in digraph.iteritems():
+    for node, neighbors in digraph.items():
         g.append([node, list(neighbors)])
     return g
 
@@ -65,16 +65,20 @@ def degree_of_flatgraph_node(flatgraph, node_id):
 def truncate(flatgraph, desired_degree):
     tries = 0
     while degree_flatgraph(flatgraph) > desired_degree and tries < 10000:
+        print('try {}'.format(tries))
         tries += 1
         index_to_remove = random.choice(range(len(flatgraph)))
         edge = flatgraph[index_to_remove]
         if degree_of_flatgraph_node(flatgraph, edge[0]) > desired_degree and degree_of_flatgraph_node(flatgraph, edge[1]) > desired_degree:
             del flatgraph[index_to_remove]
-    if tries == 10000:
+    if tries >= 10000:
         raise Exception("Infinite loop")
     return flatgraph
+
 
 if __name__ == "__main__":
     nodecount = int(sys.argv[1])
     degree = int(sys.argv[2])
-    print(json.dumps(truncate(fully_connected(nodecount), degree)))
+    graph = truncate(fully_connected(nodecount), degree)
+    with open('graph-{}-{}.json'.format(nodecount, degree), 'w') as output:
+        json.dump(graph, output)

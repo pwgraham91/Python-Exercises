@@ -17,4 +17,5 @@ for i in range(1, node_count + 1):
             edge = (neighbor, i)
         graph.add(edge)
 
-print(json.dumps(list(graph)))
+with open('graph-{}.json'.format(node_count), 'w') as output:
+    json.dump(list(graph), output)

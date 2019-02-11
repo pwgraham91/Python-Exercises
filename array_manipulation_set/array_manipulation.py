@@ -36,6 +36,21 @@ Explanation:
 """
 
 
+def difference_prefix(n, queries):
+    diff_array = [0 for i in range(n + 1)]
+    for i in queries:
+        diff_array[i[0] - 1] += i[2]
+        diff_array[i[1]] -= i[2]
+    maximum = 0
+    tsum = 0
+    for i in diff_array:
+        tsum += i
+        if tsum > maximum:
+            maximum = tsum
+
+    return maximum
+
+
 def manipulate_array(n, queries):
     array = [0] * n
 
@@ -46,9 +61,10 @@ def manipulate_array(n, queries):
     return max(array)
 
 
-assert manipulate_array(5, [
+assert difference_prefix(5, [
     [1, 2, 100],
     [2, 5, 100],
     [3, 4, 100]]) == 200
-assert manipulate_array(10, [[1, 5, 3], [4, 8, 7], [6, 9, 1]]) == 10
-assert manipulate_array(10, [[2, 6, 8], [3, 5, 7], [1, 8, 1], [5, 9, 15]]) == 31
+
+assert difference_prefix(10, [[1, 5, 3], [4, 8, 7], [6, 9, 1]]) == 10
+assert difference_prefix(10, [[2, 6, 8], [3, 5, 7], [1, 8, 1], [5, 9, 15]]) == 31

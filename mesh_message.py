@@ -47,4 +47,4 @@ assert route_iteratively('Jayden', 'No One') is None
 assert route_iteratively('Jayden', 'Jayden') == ['Jayden']
 assert route_iteratively('Adam', 'William') == ['Adam', 'Amelia', 'Jayden', 'Min', 'William']
 assert route_iteratively('Miguel', 'Jayden') == ['Miguel', 'Amelia', 'Jayden']
-
+assert route_iteratively('Omar', 'Sofia') == ['Omar', 'Ren', 'Jayden', 'Amelia', 'Adam', 'Sofia']

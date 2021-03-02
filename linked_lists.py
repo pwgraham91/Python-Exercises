@@ -32,8 +32,3 @@ def find_continue(link, value):
 
 def search(head, value):
     return find_continue(head, value)
-
-
-head = add_links()
-print_to_end(head)
-c = search(head, 'c')

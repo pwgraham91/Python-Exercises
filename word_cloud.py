@@ -39,5 +39,5 @@ def build_cloud(sentence):
 build_cloud('After beating the eggs, Dana read the next step:')
 build_cloud('Add milk and eggs, then add flour and sugar.')
 build_cloud("The long-term effects of smoking include lung cancer.")
-build_cloud("We came, we saw, we conquered...then we ate Bill's (Mille-Feuille) cake.")
+build_cloud("We came, we saw, we conquered...then we ate Bill's (Mille-Feuille) cake. Then we ate another cake.")
 build_cloud('The bill came to five dollars.')

@@ -17,7 +17,13 @@ network = {
     'Liam': ['Miguel'],
 }
 
-
+"""
+This works by using a breadth-first search. It iterates through connections creates a queue of routes to check. It 
+takes the shortest possible path because a breadth first search adds only one edge at a time to the list of possible 
+paths.
+ex: Jayden -> Omar
+ex: [['Jayden', 'Ren'], ['Jayden', 'Noam'], ['Jayden', 'Min', 'William'], ['Jayden', 'Min', 'Omar']]
+"""
 def route_iteratively(originator, receiver):
     if originator == receiver:
         return [originator]

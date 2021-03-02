@@ -180,14 +180,11 @@ def _bfs_iterative(search_for, node, queue):
     if node is None:
         return
 
-    print(node)
-
     # add root
     queue.append(node)
 
     while queue:
         obj = queue.pop(0)
-        print(obj.value)
         if obj.value == search_for:
             return True
         if obj.left is not None:
@@ -198,12 +195,10 @@ def _bfs_iterative(search_for, node, queue):
 
 def depth_first_iterative(search_for):
     root = build_4_layer_even_tree()
-    print(root)
 
     stack = [root]
     while stack:
         node = stack.pop()
-        print(node.value)
         if node.value == search_for:
             return True
         if node.right is not None:

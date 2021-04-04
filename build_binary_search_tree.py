@@ -42,28 +42,25 @@ def build_tree_recursively(items):
 
 
 def build_tree_iteratively(items):
-    head_node = None
-    values = []
-    for i, item in enumerate(items):
-        if i == 0:
-            head_node = BinaryTreeNode(item)
-            continue
-        else:
-            values.append((head_node, item))
+    head_node = BinaryTreeNode(items.pop(0))
 
-    while len(values):
-        value_tuple = values.pop(0)
-        node: BinaryTreeNode = value_tuple[0]
-        value: int = value_tuple[1]
+    while len(items):
+        value_tuple_or_int = items.pop(0)
+        if type(value_tuple_or_int) is tuple:
+            node: BinaryTreeNode = value_tuple_or_int[0]
+            value: int = value_tuple_or_int[1]
+        else:
+            node = head_node
+            value = value_tuple_or_int
 
         if value < node.value:
             if node.left:
-                values.insert(0, (node.left, value))
+                items.insert(0, (node.left, value))
             else:
                 node.insert_left(value)
         elif value > node.value:
             if node.right:
-                values.insert(0, (node.right, value))
+                items.insert(0, (node.right, value))
             else:
                 node.insert_right(value)
 

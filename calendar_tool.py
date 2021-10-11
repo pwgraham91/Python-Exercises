@@ -102,29 +102,15 @@ def sort_solution(schedules: list):
         if index == 0:
             booked_ranges.append((event_start, event_end))
         else:
-            previous_range = booked_ranges[len(booked_ranges) - 1]
+            previous_range = booked_ranges[-1]
             previous_start = previous_range[0]
             previous_end = previous_range[1]
 
-            # if the event entirely encapsulates the booked range
-            if event_start <= previous_start and event_end >= previous_end:
-                booked_ranges[len(booked_ranges) - 1] = (event_start, event_end)
-                continue
-
-            included = False
             # if the event start is inside the range
-            if event_start >= previous_start and event_start <= previous_end:
-                included = True
+            if previous_start <= event_start <= previous_end:
                 if event_end > previous_end:
-                    booked_ranges[len(booked_ranges) - 1] = (previous_start, event_end)
-
-            # if the event end is inside the range
-            if event_end <= previous_end and event_end >= previous_start:
-                included = True
-                if event_start < previous_start:
-                    booked_ranges[len(booked_ranges) - 1] = (event_start, booked_ranges[len(booked_ranges) - 1][1])
-
-            if not included:
+                    booked_ranges[-1] = (previous_start, event_end)
+            else:
                 booked_ranges.append((event_start, event_end))
 
     return booked_ranges
